@@ -19,6 +19,25 @@
 
 import axios from 'axios'
 import {signingParams} from './assets/auth'
+import firebase from "firebase";
+var config = {
+  apiKey: "AIzaSyAdK9qrNj1G6abHZiYkyDvdJ3pajUnBtS8",
+  authDomain: "eac-chat-ddecb.firebaseapp.com",
+  databaseURL: "https://eac-chat-ddecb.firebaseio.com",
+  projectId: "eac-chat-ddecb",
+  storageBucket: "eac-chat-ddecb.appspot.com",
+  messagingSenderId: "453164258119"
+};
+firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log('user is ', user)
+    // User is signed in.
+  } else {
+    console.log('uers was signed out')
+    // No user is signed in.
+  }
+});
 export default {
   name: 'App',
   data () {
@@ -31,6 +50,12 @@ export default {
     verify() {
       axios.post('http://localhost:9000/hello', {account: this.account, signature: this.signature}).then((resp) => {
         console.log(resp)
+        firebase.auth().signInWithCustomToken(resp.data.customToken).catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        })
       }).catch(error=> {
         console.log(error)
       })

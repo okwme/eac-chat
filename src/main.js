@@ -5,30 +5,30 @@ import App from './App'
 import router from './router'
 import Web3 from 'web3'
 import {
-  PortisProvider
+	PortisProvider
 } from 'portis'
 
 if (window.ethereum) {
-  window.web3 = new Web3(window.ethereum)
+	window.web3 = new Web3(window.ethereum)
 } else if (window.web3) {
-  window.web3 = new Web3(window.web3.currentProvider)
+	window.web3 = new Web3(window.web3.currentProvider)
 } else {
-  window.web3 = new Web3(
-    new PortisProvider({
-      apiKey: process.env.VUE_APP_PORTIS_KEY,
-      network: 'mainnet'
-    })
-  )
+	window.web3 = new Web3(
+		new PortisProvider({
+			apiKey: process.env.VUE_APP_PORTIS_KEY,
+			network: 'mainnet'
+		})
+	)
 }
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: {
-    App
-  },
-  template: '<App/>'
+	el: '#app',
+	router,
+	components: {
+		App
+	},
+	template: '<App/>'
 })
