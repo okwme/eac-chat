@@ -5,8 +5,8 @@ module.exports = {
         "node": true
     },
     "extends": [
-        // 'plugin:vue/essential',
-        "eslint:recommended"
+        'plugin:vue/essential',
+        "eslint:recommended",
     ],
     "parserOptions": {
         "sourceType": "module"
@@ -17,7 +17,7 @@ module.exports = {
         ],
         "indent": [
             "error",
-            "tab"
+            2
         ],
         "linebreak-style": [
             "error",
