@@ -64,8 +64,8 @@ export default {
       console.log('chat!')
     },
     launch() {
+      if (!this.auth) return this.$router.push('/')
       if (!this.chatName) this.$store.commit('SET_NAME', this.account.substr(0, 7))
-      if (!this.auth) this.$router.push('/')
       try {
         this.stopChat(this.room)
         this.startChat(this.room)
@@ -107,6 +107,7 @@ export default {
           flex: 0 0 28px;
           height:28px;
           img {
+            width:28px;
             border-radius: 100%;
             display:inline;
           }

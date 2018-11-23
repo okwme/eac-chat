@@ -10,7 +10,7 @@ export default {
   makeBlockie({commit}, address) {
     let blockie = blockies.createDataURL({
       size: 3,
-      scale: 32,
+      scale: 10,
       // bgcolor	: '#ffffff',
       // color: '#000000',
       // spotcolor: '#808080',
@@ -79,7 +79,7 @@ export default {
   async verify({state, commit}) {
     if (debug) console.log('verify')
     let network = await web3.eth.net.getId()
-    let resp = await axios.post('http://localhost:9000/hello', {
+    let resp = await axios.post('/auth', {
       network,
       account: state.account,
       signature: state.signature
