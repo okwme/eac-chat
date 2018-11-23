@@ -1,9 +1,11 @@
 <template lang="pug">
   div 
-    h1 Ethereum Access Control Chat
+    h1 Ethereum Authenticated Chat
     ul 
       li Authenticate with your wallet
       li Tokens act as access controllers to address based rooms
+      li Check out the 
+        a(href="https://github.com/okwme/eac-chat") github.com
 </template>
 
 <script>
