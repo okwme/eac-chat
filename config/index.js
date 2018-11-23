@@ -11,8 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/auth': {
-        target: 'http://localhost:9000/auth',
+      '/ethauth': {
+        target: 'http://localhost:9000/ethauth',
         changeOrigin: true
       }
     },
