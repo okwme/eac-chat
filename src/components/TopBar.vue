@@ -1,7 +1,7 @@
 <template lang="pug">
   #topBar
     router-link(to='/') Home
-    button(:disabled="false" @click="login") login
+    button(@click="authorize") {{ auth ? 'logout' : 'login'}}
 </template>
 
 <script>
@@ -18,7 +18,11 @@ export default {
     ...mapState(['account', 'signature', 'auth', 'claims']),
   },
   methods: {
-    ...mapActions(['approve', 'getAccount', 'verify', 'getSignature']),
+    ...mapActions(['approve', 'getAccount', 'verify', 'getSignature', 'logout']),
+    authorize() {
+      if (this.auth) this.logout()
+      else this.login()
+    },
     async login() {
       if (!this.account) {
         try {

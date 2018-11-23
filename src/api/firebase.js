@@ -11,15 +11,12 @@ var config = {
 
 firebase.initializeApp(config)
 
-// var database = firebase.database()
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log('user is ', user)
-    // User is signed in.
-  } else {
-    console.log('uers was signed out')
-    // No user is signed in.
-  }
-})
+export const db = firebase.database()
+// export const db = firebase.firestore()
+// Disable deprecated features
+// db.settings({
+//   timestampsInSnapshots: true
+// })
+
 
 export const fb = firebase

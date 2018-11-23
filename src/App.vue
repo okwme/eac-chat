@@ -3,7 +3,8 @@
     top-bar
     #divide
       side-bar
-      router-view
+      .router-view
+        router-view
 </template>
 <script>
 
@@ -38,7 +39,10 @@ export default {
   }
   #sideBar {
     height:calc(100vh - 50px);
-    width: 280px;
+    flex: 0 0 180px;
     overflow: auto;
+  }
+  .router-view {
+    flex-grow: 1;
   }
 </style>

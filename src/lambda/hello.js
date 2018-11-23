@@ -55,7 +55,7 @@ export const handler = function(event, context, callback) {
         var uid = recovered + '-' + (network === mainnet ? '1' : '4')
         let additionalClaims = {lobby: true}
         response.data.payload.records.forEach(r => {
-          additionalClaims[r.address] = parseInt(r.balance) > 0
+          additionalClaims['0x' + r.address] = parseInt(r.balance) > 0
         })
         console.log(additionalClaims)
         admin.auth().createCustomToken(uid, additionalClaims)
