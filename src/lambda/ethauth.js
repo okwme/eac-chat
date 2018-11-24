@@ -1,12 +1,21 @@
-// require('dotenv').config()
+require('dotenv').config()
 import sigUtil from 'eth-sig-util'
 import { signingParams } from '../assets/auth'
 import axios from 'axios'
 
 // setup firebase w serviceAccountKey.json
 var admin = require('firebase-admin')
-const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
-// const serviceAccount = process.env.FIREBASE_CERT
+// const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
+const serviceAccount = require('../../serviceAccountKey.json')
+// const serviceAccount = {
+// }
+// Object.keys(process.env).forEach((k) => {
+//   if (k.substr(0,3) === 'FB_') {
+//     console.log(k)
+//     serviceAccount[k.replace('FB_', '')] = process.env[k]
+//   }
+// })
+console.log('serviceAccount!!!', serviceAccount)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://eac-chat-ddecb.firebaseio.com'
