@@ -10,7 +10,7 @@ export default {
   makeBlockie({commit}, address) {
     let blockie = blockies.createDataURL({
       size: 3,
-      scale: 10,
+      scale: 12,
       // bgcolor	: '#ffffff',
       // color: '#000000',
       // spotcolor: '#808080',

@@ -100,29 +100,31 @@ export default {
         border-bottom:1px solid black;
         display: flex;
         > * {
-          min-height:28px;
+          min-height:36px;
         }
         .icon {
           padding:0px;
-          flex: 0 0 28px;
-          height:28px;
+          flex: 0 0 36px;
+          height:36px;
           img {
-            width:28px;
+            width:36px;
             border-radius: 100%;
             display:inline;
           }
         }
         .username {
           border-left:1px solid black;
-          padding: 0px 5px;
+          padding: 5px;
 
           overflow: hidden;
           border-right: 1px solid black;
           flex: 0 0 120px;
+          line-height:26px;
         }
         .message {
-          padding: 0px 5px;
+          padding: 5px;
           flex: 0 0 none;
+          line-height:26px;
         }
       }
     }
