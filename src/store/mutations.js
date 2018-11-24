@@ -30,5 +30,8 @@ export default {
   },
   SET_BLOCKIE(state, {address, blockie}) {
     Vue.set(state.blockies, address, blockie)
+  },
+  SET_HIDE(state, bool) {
+    state.hide = bool
   }
 }

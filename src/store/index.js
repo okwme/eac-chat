@@ -21,6 +21,7 @@ const vuexLocal = new VuexPersistence({
 })
 
 const state = {
+  hide: true,
   chatName: null,
   auth: false,
   account: false,

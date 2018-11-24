@@ -62,9 +62,10 @@ export default {
       }
     }
   },
-  logout({commit}) {
-    console.log('logout')
-    fb.auth().signOut().then(() => {
+  async logout({commit}) {
+    if(debug) console.log('logout')
+    try {
+      await fb.auth().signOut()
       commit('SET_ACCOUNT', false)
       commit('SET_SIGNATURE', false)
       commit('SET_AUTH', false)
@@ -72,9 +73,9 @@ export default {
       commit('SET_TOKENS', [])
       commit('SET_CHAT', [])
       commit('SET_NAME', null)
-    }).catch((error) => {
+    } catch (error) {
       console.error(error)
-    })
+    }
   },
   async verify({state, commit}) {
     if (debug) console.log('verify')
@@ -86,24 +87,36 @@ export default {
       signature: state.signature
     })
     await fb.auth().signInWithCustomToken(resp.data.customToken)
+    commit('SET_HIDE', false)
     commit('SET_AUTH', true)
     commit('SET_CLAIMS', resp.data.additionalClaims)
     commit('SET_TOKENS', resp.data.data.payload)
   },
-  addChat(_, {id, chat}) {
-    console.log('addChat')
+  addChat({state}, {id, chat}) {
+    if(debug) console.log('addChat')
     let user = fb.auth().currentUser
-    console.log(user.uid)
     if (user) chat.user_id = user.uid
-    console.log(chat)
+    if (!chat.name) chat.name = state.account.substr(0,7)
     db.ref('rooms/' + id).push(chat)
   },
+  async launch({state, dispatch}, room) {
+    if (debug) console.log('launch ' + room)
+    try {
+      dispatch('stopChat', room)
+      await dispatch('startChat', room)
+    } catch (error) {
+      console.log(error)
+      setTimeout(() => {
+        if (!state.auth || state.claims[room]) dispatch('launch', room)
+      }, 2000)
+    }
+  },
   stopChat(_, id) {
-    console.log('stopChat')
+    if(debug) console.log('stopChat')
     db.ref('rooms/' + id).off()
   },
-  startChat({commit}, id) {
-    console.log('startChat', 'rooms/' + id)
+  async startChat({commit}, id) {
+    if(debug) console.log('startChat', 'rooms/' + id)
     commit('SET_CHAT', [])
     // let chats = db.collection('rooms').doc(id)
     // chats.get().then((doc) => {
@@ -120,19 +133,19 @@ export default {
     // })
     let newRoom = true
     let isFirst = true
-    db.ref('rooms/' + id).limitToLast(100).once('value').then((data) => {
-      console.log('value', data.val())
+    try {
+      let data = await db.ref('rooms/' + id).limitToLast(100).once('value')
       if (data.val()) {
         newRoom = false
         commit('SET_CHAT', Object.values(data.val()))
       }
       db.ref('rooms/' + id).limitToLast(1).on('child_added', function(data) {
-        console.log(data)
-        console.log('child_added', data.val())
         if (newRoom || !isFirst) commit('ADD_CHAT', data.val())
         if (isFirst) isFirst = false
       })
-    })
+    } catch (error) {
+      return Promise.reject(error)
+    }
 
 
     // chats.once('value').then((data) => {

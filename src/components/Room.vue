@@ -6,12 +6,22 @@
             a(:title="chat.user_id" target="_blank" :href="'https://etherscan.io/address/' + chat.user_id.split('-')[0]") 
               img(:src="getsrc(chat.user_id)")
           span.username
-            b(v-html="xss(chat.name.substr(0,7))" ) 
+            b(v-text="xss(chat.name.substr(0,7))" ) 
           span.message
-            div(v-html="xss(chat.message)")
-      #new-chats
-        input#chatName(v-model="displayName" placeholder="name" maxlength="7" type="text")
-        input#chatInput(@submit="sendChat" v-model="chatInput" @keyup.enter="sendChat" maxlength="255" placeholder="message")
+            div(v-text="xss(chat.message)")
+      #new-chats(v-show="auth")
+        input#chatInput(
+          @submit="sendChat" 
+          v-model="chatInput" 
+          @keyup.enter="sendChat" 
+          maxlength="255" 
+          placeholder="Message" 
+          type="text")
+        input(
+          type="submit"
+          @click="sendChat"
+          value="Send"
+        )
 </template>
 
 <script>
@@ -25,29 +35,16 @@ export default {
       chatInput: null
     }
   },
-  watch: {
-    room() {
-      this.launch()
-    }
-  },
   props: ['room'],
   computed: {
-    ...mapState(['chatName', 'tokens', 'chats', 'account', 'auth', 'blockies']),
+    ...mapState(['chatName', 'tokens', 'chats', 'account', 'auth', 'blockies', 'claims']),
     thisRoom() {
       return this.tokens && this.tokens.records && this.tokens.records.find(t => {
         return t.address === this.room.replace('0x', '')})
-    },
-    displayName: {
-      get () {
-        return this.chatName
-      },
-      set (value) {
-        this.$store.commit('SET_NAME', value)
-      }
     }
   },
   methods: {
-    ...mapActions(['startChat', 'addChat', 'stopChat', 'makeBlockie']),
+    ...mapActions(['stopChat', 'addChat', 'launch', 'makeBlockie']),
     getsrc(id) {
       if (!id) return false
       return this.blockies[id] || this.makeBlockie(id)
@@ -56,32 +53,19 @@ export default {
       return xss(foo)
     },
     async sendChat() {
+      if (!this.chatInput || this.chatInput.trim() === '') return
       await this.addChat({id: this.room, chat: {
         message: this.chatInput,
         name: this.chatName
       }})
       this.chatInput = null
-      console.log('chat!')
-    },
-    launch() {
-      if (!this.auth) return this.$router.push('/')
-      if (!this.chatName) this.$store.commit('SET_NAME', this.account.substr(0, 7))
-      try {
-        this.stopChat(this.room)
-        this.startChat(this.room)
-      } catch (error) {
-        console.error(error)
-        this.$router.push('/')
-      }
     }
   },
   destroyed() {
-    console.log('destroyed')
     this.stopChat(this.room)
   },
   mounted() {
-    console.log('mounted')
-    this.launch()
+    this.launch(this.room)
   }
 }
 </script>
@@ -89,35 +73,41 @@ export default {
 <style lang="scss">
   #room {
     display: flex;
+    height: calc(100vh - 50px);
     flex-direction: column;
+    justify-content: space-between;
     width:100%;
     #previous-chats {
-      flex-grow: 1;
-      height: calc(100vh - 120px);
+      flex: 0 0 2;
+      // height: calc(100vh - 120px);
       overflow: auto;
       // box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
       .chat {
-        border-bottom:1px solid black;
+        // border-bottom:1px solid black;
         display: flex;
         > * {
           min-height:36px;
+        }
+        &:nth-child(odd) {
+          background-color: rgba(0,0,0,0.1);
         }
         .icon {
           padding:0px;
           flex: 0 0 36px;
           height:36px;
           img {
-            width:36px;
+            margin:6px;
+            width:24px;
             border-radius: 100%;
             display:inline;
           }
         }
         .username {
-          border-left:1px solid black;
+          // border-left:1px solid black;
           padding: 5px;
 
           overflow: hidden;
-          border-right: 1px solid black;
+          // border-right: 1px solid black;
           flex: 0 0 120px;
           line-height:26px;
         }
@@ -125,24 +115,30 @@ export default {
           padding: 5px;
           flex: 0 0 none;
           line-height:26px;
+          word-break: break-all;
         }
       }
     }
     #new-chats {
-      height:60px;
+      // height:60px;
+      border-top: 1px solid black;
       padding: 20px;
       display: flex;
-      input {
-        height:40px;
-        line-height: 40px;
-        font-size: 24px;
-        padding:0 10px;
-      }
+      flex: 0 0 auto;
       #chatName {
         width:170px;
       }
       #chatInput {
         flex-grow: 1;
+      }
+
+      input[type="submit"]{
+        cursor: pointer;
+        border: 1px solid lightgrey;
+        margin-left:20px;
+        width: 80px;
+        font-size: 24px;
+        background-color: transparent;
       }
     }
   }

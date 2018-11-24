@@ -12,7 +12,6 @@ Vue.config.productionTip = false
 
 fb.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log(user.uid)
     if (store.state.account && store.state.signature && !store.state.auth) {
       store.dispatch('verify')
     }

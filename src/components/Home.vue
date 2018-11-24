@@ -1,10 +1,8 @@
 <template lang="pug">
-  div(v-html="readme")
+  #home(v-html="readme")
 </template>
 
 <script>
-import foo  from '@/../README.md'
-console.log(foo)
 export default {
   name: 'Home',
   computed: {
@@ -15,8 +13,11 @@ export default {
 }
 </script>
 
-<style scoped>
-  div {
+<style>
+  div#home {
     padding: 20px;
+  }
+  ul {
+    padding-inline-start: 20px;
   }
 </style>

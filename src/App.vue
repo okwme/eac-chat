@@ -24,25 +24,40 @@ export default {
   * {
     box-sizing: border-box;
   }
+  *:focus {
+    outline: none;
+  }
   html, body {
     padding: 0;
     margin:0;
   }
-  #topBar {
-    padding:0px 20px;
-    border-bottom: 1px solid black;
-    height: 50px;
-    line-height: 50px;
+  #app {
+    max-width:100vw;
+    overflow: hidden;
   }
+
   #divide {
     display: flex;
   }
-  #sideBar {
-    height:calc(100vh - 50px);
-    flex: 0 0 200px;
-    overflow: auto;
-  }
+
   .router-view {
     flex-grow: 1;
+    border-left: 1px solid black;
+    left:-1px;  
+    position: relative;
+  }
+  @media only screen and (max-width: 768px)   {
+    .router-view {
+      min-width: 100vw;
+    }
+  }
+  input[type="text"] {
+    height:40px;
+    line-height: 40px;
+    font-size: 24px;
+    padding:0 10px;
+    width:100%;
+    background-color: transparent;
+    border: 1px solid lightgrey;
   }
 </style>
