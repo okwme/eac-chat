@@ -5,7 +5,8 @@ import axios from 'axios'
 
 // setup firebase w serviceAccountKey.json
 var admin = require('firebase-admin')
-const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
+// const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
+const serviceAccount = process.env.FIREBASE_CERT
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://eac-chat-ddecb.firebaseio.com'
