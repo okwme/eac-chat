@@ -114,7 +114,7 @@ export default {
         }
         .username {
           border-left:1px solid black;
-          padding: 5px;
+          padding: 0px 5px;
 
           overflow: hidden;
           border-right: 1px solid black;
