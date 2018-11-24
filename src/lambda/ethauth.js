@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 import sigUtil from 'eth-sig-util'
 import { signingParams } from '../assets/auth'
 import axios from 'axios'
@@ -10,6 +10,7 @@ var admin = require('firebase-admin')
 const serviceAccount = {
 }
 Object.keys(process.env).forEach((k) => {
+  console.log(k)
   if (k.substr(0,3) === 'FB_') {
     console.log(k)
     serviceAccount[k.replace('FB_', '')] = process.env[k]
