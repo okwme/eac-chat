@@ -1,27 +1,9 @@
-# eac-chat
+# Ethereum Authenticated Chat 
 
-> Ethereum Access Control Chat
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+* Authenticate with an Ethereum wallet
+* Access via balances in ERC-20 or ERC-721 tokens
+* Blockchain data via <a href="https://amberdata.io" target="_blank">amberdata.io</a>
+* Chat via <a href="https://firebase.google.com" target="_blank">google firebase</a>
+* Hosting via <a href="http://netlify.com" target="_blank">netlify</a>
+* Authentication via <a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda</a>
+* Check out the <a href="https://github.com/okwme/eac-chat" target="_blank">github</a> for more info

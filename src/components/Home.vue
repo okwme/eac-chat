@@ -1,25 +1,17 @@
 <template lang="pug">
-  div 
-    h1 Ethereum Authenticated Chat
-    ul 
-      li Authenticate with an Ethereum wallet
-      li Access via balances in ERC-20 or ERC-721 tokens
-      li Blockchain data via 
-        a(href="https://amberdata.io" target="_blank") amberdata.io
-      li Chat via 
-        a(href="https://firebase.google.com" target="_blank") google firebase
-      li Hosting via 
-        a(href="http://netlify.com" target="_blank") netlify
-      li Authentication via 
-        a(href="https://aws.amazon.com/lambda/" target="_blank") AWS Lambda
-      li Check out the 
-        a(href="https://github.com/okwme/eac-chat" target="_blank") github
-        |  for more info
+  div(v-html="readme")
 </template>
 
 <script>
+import foo  from '@/../README.md'
+console.log(foo)
 export default {
-  name: 'Home'
+  name: 'Home',
+  computed: {
+    readme() {
+      return require('@/../README.md')
+    } 
+  }
 }
 </script>
 
