@@ -11,7 +11,7 @@
             div(v-html="xss(chat.message)")
       #new-chats
         input#chatName(v-model="displayName" placeholder="name" maxlength="7" type="text")
-        input#chatInput(@submit="sendChat" v-model="chatInput" @keyup.enter="sendChat" maxlength="255")
+        input#chatInput(@submit="sendChat" v-model="chatInput" @keyup.enter="sendChat" maxlength="255" placeholder="message")
 </template>
 
 <script>
@@ -95,7 +95,7 @@ export default {
       flex-grow: 1;
       height: calc(100vh - 120px);
       overflow: auto;
-      box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
+      // box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
       .chat {
         border-bottom:1px solid black;
         display: flex;
