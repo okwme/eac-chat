@@ -21,6 +21,8 @@ const headers = {
 }
 
 export const handler = function(event, context, callback) {
+  console.log('serviceAccount', serviceAccount)
+
   if (event.httpMethod !== 'POST') {
     return callback(null, {
       headers,
@@ -29,7 +31,6 @@ export const handler = function(event, context, callback) {
     })
   }
 
-  console.log('serviceAccount', serviceAccount)
 
   // get POST values
   let data = JSON.parse(event.body)
