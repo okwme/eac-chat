@@ -5,7 +5,6 @@ import axios from 'axios'
 
 // setup firebase w serviceAccountKey.json
 var admin = require('firebase-admin')
-console.log('!!!', process.env.FIREBASE_CERT)
 const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -20,8 +19,7 @@ const headers = {
 }
 
 export const handler = function(event, context, callback) {
-  console.log('1')
-
+  console.log('begin')
   if (event.httpMethod !== 'POST') {
     return callback(null, {
       headers,
@@ -29,8 +27,7 @@ export const handler = function(event, context, callback) {
       body: JSON.stringify({msg: 'Nope'})
     })
   }
-  console.log('2')
-
+  console.log('is a post')
 
   // get POST values
   let data = JSON.parse(event.body)
