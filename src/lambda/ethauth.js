@@ -23,7 +23,7 @@ Object.keys(process.env).forEach((k) => {
   }
 })
 console.log('serviceAccount!!!', serviceAccount)
-console.log('btoa', btoa(serviceAccount.private_key))
+// console.log('btoa', btoa(serviceAccount.private_key))
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://eac-chat-ddecb.firebaseio.com'

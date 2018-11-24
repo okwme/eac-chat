@@ -79,7 +79,8 @@ export default {
   async verify({state, commit}) {
     if (debug) console.log('verify')
     let network = await web3.eth.net.getId()
-    let resp = await axios.post('/ethauth', {
+    // let resp = await axios.post('/ethauth', {
+    let resp = await axios.post('https://dupgv1xzc7.execute-api.us-east-2.amazonaws.com/default/ether-auth', {
       network,
       account: state.account,
       signature: state.signature

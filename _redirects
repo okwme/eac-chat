@@ -1,2 +1,2 @@
-/ethauth /.netlify/functions/ethauth 200
+/ethauth https://dupgv1xzc7.execute-api.us-east-2.amazonaws.com/default/ether-auth 200
 /*    /index.html   200
