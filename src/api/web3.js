@@ -11,7 +11,7 @@ if (window.ethereum) {
 } else {
   window.web3 = new Web3(
     new PortisProvider({
-      apiKey: 'f5d4ae50e50d268dadea7cfa5f546cb2',
+      apiKey: '4f10a8de9f9fd31b1d6caa907759c00f',
       network: 'mainnet'
     })
   )
