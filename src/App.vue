@@ -39,7 +39,7 @@ export default {
   }
   #sideBar {
     height:calc(100vh - 50px);
-    flex: 0 0 180px;
+    flex: 0 0 200px;
     overflow: auto;
   }
   .router-view {

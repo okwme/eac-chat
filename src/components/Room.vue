@@ -121,7 +121,7 @@ export default {
           flex: 0 0 120px;
         }
         .message {
-          padding: 5px;
+          padding: 0px 5px;
           flex: 0 0 none;
         }
       }
