@@ -6,7 +6,6 @@ import axios from 'axios'
 // setup firebase w serviceAccountKey.json
 var admin = require('firebase-admin')
 const serviceAccount = require('../../serviceAccountKey.json')
-console.log('serviceAccount', serviceAccount)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://eac-chat-ddecb.firebaseio.com'
@@ -27,6 +26,8 @@ export const handler = function(event, context, callback) {
       body: JSON.stringify({msg: 'Nope'})
     })
   }
+
+  console.log('serviceAccount', serviceAccount)
 
   // get POST values
   let data = JSON.parse(event.body)
