@@ -80,14 +80,5 @@ export default {
       margin-top:15px;
       margin-right:10px;
     }
-    #toggle-menu {
-      // margin-top:10px;
-      // cursor: pointer;
-      // width: 30px;
-      // height: 30px;
-      // // border: 1px solid black;
-      // font-size: 30px;
-      // line-height:30px;
-    }
   }
 </style>
