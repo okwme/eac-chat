@@ -11,7 +11,7 @@
         v-for="token in rooms" :key="token.address"
         :class="{'ERC20': token.isERC20,'ERC721': token.isERC721}")
           span(@click="launch('0x' + token.address)")
-            router-link(:to="'0x' + token.address" :title="token.name" ) {{token.symbol.substr(0, 20)}} <!--/ {{token.name}}-->
+            router-link(:to="'0x' + token.address" :title="token.name" ) {{token.symbol && token.symbol.substr(0, 20)}} <!--/ {{token.name}}-->
           a(:href="'https://etherscan.io/token/0x' + token.address + '?a=' + account" target="_blank")
             img(src="/static/link.png")
     #nameInput(v-if="auth")
