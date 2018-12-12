@@ -32,7 +32,7 @@ export default {
   computed: {
     ...mapState(['tokens', 'auth', 'claims', 'account', 'chatName', 'hide']),
     rooms() {
-      return this.tokens.records && this.tokens.records.filter((r) => this.claims['0x' + r.address])
+      return this.tokens.records && this.tokens.records.filter((r) => this.claims[r.address])
     },
     displayName: {
       get () {

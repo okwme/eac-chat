@@ -6,9 +6,9 @@ import axios from 'axios'
 function atob(a) {
   return new Buffer(a, 'base64').toString('binary')
 }
-function btoa(b) {
-  return new Buffer(b).toString('base64');
-};
+// function btoa(b) {
+//   return new Buffer(b).toString('base64');
+// };
 // setup firebase w serviceAccountKey.json
 var admin = require('firebase-admin')
 // const serviceAccount = JSON.parse(process.env.FIREBASE_CERT)
