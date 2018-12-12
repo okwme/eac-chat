@@ -93,7 +93,7 @@ export const handler = function(event, context, callback) {
 
     // add access to tokens with balance > 0
     response.data.payload.records.forEach(r => {
-      additionalClaims[r.address] = parseInt(r.balance) > 0 && r.symbol !== ''
+      additionalClaims[r.address] = parseInt(r.balance) > 0 //&& r.symbol !== ''
     })
 
     // create token with additional claims
